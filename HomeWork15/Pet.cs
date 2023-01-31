@@ -15,7 +15,7 @@ namespace HomeWork15
 
         public string Name { get => name; }
         public int Weight { get => weight; set => weight = value; }
-        internal PetType Type { get => type; set => type = value; }
+        internal PetType Type { get => type; private set => type = value; }
 
         public Pet(string name, PetType type, int weight)
 		{

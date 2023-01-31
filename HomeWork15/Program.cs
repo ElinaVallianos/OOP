@@ -25,6 +25,7 @@ class Program
         int count = 0;
         for (int i = 0; i < person.NumberOfPets; i++)
         {
+            //использовать getAllPets!!! для работы с массивом Pets
             if (person.Pets[i].Weight == 0)
             {
                 Console.WriteLine($"{i + 1} - {person.Pets[i].Type}" +

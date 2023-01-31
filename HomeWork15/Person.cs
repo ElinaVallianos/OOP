@@ -3,6 +3,7 @@ namespace HomeWork15
 {
 	public class Person
 	{
+		const int maxNumberOfPets = 5;
 		private string name;
 		private int age;
 
@@ -10,7 +11,8 @@ namespace HomeWork15
 
 		public string Name { get => name; }
 		public int Age { get => age; }
-        public int NumberOfPets { get => numberOfPets; set => numberOfPets = value; }
+		//модификаторы доступа можно задать для set или get отдельно
+        public int NumberOfPets { get => numberOfPets; private set => numberOfPets = value; }
 
         public Pet[] Pets { get => pets; set => pets = value; } //?
 
@@ -20,12 +22,12 @@ namespace HomeWork15
 		{
 			this.name = name;
 			this.age = age;
-			Pets = new Pet[5];
+			Pets = new Pet[maxNumberOfPets];
 		}
 
 		public void AddPet(Pet pet)
 		{
-			if (NumberOfPets < 5)
+			if (NumberOfPets < maxNumberOfPets)
 			{
                 Pets[NumberOfPets] = pet;
 				NumberOfPets++;
@@ -34,22 +36,20 @@ namespace HomeWork15
 
 		public void RemovePet(string name)
 		{
-			Pet[] NewPets = new Pet[NumberOfPets - 1];
+			Pet[] NewPets = new Pet[maxNumberOfPets];
 			int index = 0;
-			for (int i = 0; i < NumberOfPets ; i++)
+			for (int i = 0; i < maxNumberOfPets ; i++)
 			{
                 if (Pets[i].Name.ToLower().Contains(name.ToLower()))
 				{
-					continue;
+                    NumberOfPets--;
+                    continue;
 				}
-				else
-				{
-					NewPets[index] = Pets[i];
-					index++;
-				}
+				NewPets[index] = Pets[i];
+				index++;
             }
 			Pets = NewPets;
-			NumberOfPets--;
+			
 		}
 
 		public Pet[] GetAllPets()
