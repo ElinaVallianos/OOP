@@ -5,15 +5,7 @@ namespace HomeWork17
 	{
 		private Oxygen? oxygen1;
 
-        public Oxygen? Oxygen1 { get => oxygen1;
-			set
-			{
-				if (this.Oxygen1 == null && (value?.Hidrogen1 == null || value?.Hidrogen2== null))
-				{
-					oxygen1 = value;
-				}
-			}
-		}
+        public Oxygen? Oxygen1 { get => oxygen1; set => oxygen1 = value; }
 
 		public Hydrogen()
 		{
@@ -22,7 +14,19 @@ namespace HomeWork17
 
         public void React(Oxygen oxygen) //здесь тоже проверять наналичие свободных полей?
 		{
-			this.oxygen1 = oxygen;
+			if (this.oxygen1 != null) return;
+			if (oxygen.Hidrogen1 == null)
+			{
+				oxygen.Hidrogen1 = this;
+				this.oxygen1 = oxygen;
+				return;
+			}
+
+			if (oxygen.Hidrogen2 == null)
+			{
+                oxygen.Hidrogen2 = this;
+                this.oxygen1 = oxygen;
+            }
 		}
 	}
 }

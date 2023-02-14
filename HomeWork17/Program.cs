@@ -17,8 +17,10 @@ class Program
         h4.React(o1);
         o3.React(h4);
 
-        Console.WriteLine(IsWater(h4));
-        Console.WriteLine(IsWater(o1));
+        string answer = IsWater(h4) ? "" : "not";
+        Console.WriteLine($" 'h4' is {answer} in water molecule.");
+        answer = IsWater(o1) ? "" : "not";
+        Console.WriteLine($" 'o1' is {answer} in water molecule.");
 
     }
 
@@ -26,30 +28,18 @@ class Program
     {
         if (hydro.Oxygen1 != null)
         {
-            if (hydro.Oxygen1.Hidrogen1 != null && hydro.Oxygen1.Hidrogen2 != null )
-            {
-                if (hydro.Oxygen1.Hidrogen1 != hydro.Oxygen1.Hidrogen2)
-                {
-                    return true;
-                }
-                return false;
-            }
-            return false;
+            return IsWater(hydro.Oxygen1);
         }
         return false;
     }
 
     static bool IsWater(Oxygen oxy)
     {
-        if (oxy.Hidrogen1 != null && oxy.Hidrogen2 != null)
+        if (oxy.Hidrogen1 == null || oxy.Hidrogen2 == null)
         {
-            if (oxy.Hidrogen2 != oxy.Hidrogen1)
-            {
-                return true;
-            }
             return false;
         }
-        return false;
+        return true;
     }
 }
 
