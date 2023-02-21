@@ -1,7 +1,7 @@
 ﻿using System;
 namespace HomeWork18
 {
-	enum Sex
+	public enum Sex
 	{
 		Unknown,
 		Male,

@@ -1,7 +1,7 @@
 ﻿using System;
 namespace HomeWork18
 {
-	enum Status
+	public enum Status
 	{
 		Single,
 		Alfa,
@@ -42,11 +42,6 @@ namespace HomeWork18
 				return;
 			}
 			Console.Write("Does not have any puppies.\n");
-        }
-
-		public override void GetInfo()
-		{
-            Console.WriteLine($"Sex: {Sex}, age: {age} years. Lives in {Habitat}. Diet: {Food}.");
         }
     }
 }
