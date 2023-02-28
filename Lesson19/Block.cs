@@ -1,14 +1,15 @@
 ﻿using System;
 namespace Lesson19
 {
-	public class Block : GameObject, IDamageble
+	public class Block : Wall, IDamageble
 	{
         private int health;
 
         public int Health => health;
 
-        public Block(int x, int y) : base(x, y)
+        public Block(int x, int y, int health) : base(x, y)
         {
+            this.health = health;
         }
 
 

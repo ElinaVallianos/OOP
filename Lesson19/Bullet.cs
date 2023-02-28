@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Lesson19
 {
-	public class Bullet : GameObject, IMovable
+	public class Bullet : GameObject, IMovable, ICollideble 
 	{
         private Vector2 direction;
         private int power;
@@ -26,6 +26,33 @@ namespace Lesson19
         public void Attack(IDamageble target)
         {
             target.Damage(power);
+        }
+
+        public void Collide(GameObject obj)
+        {
+            if (Position.X == obj.Position.X && Position.Y == obj.Position.Y)
+            {
+                Console.WriteLine($"{this}\tCollision with {obj}");
+
+                //оператор is проверяет представляет ли значение определенный тип или интерфейс
+                if (obj is IDamageble)
+                {
+                    //приводим объект типа GameObject к интерфейсу IDamageble
+                    Attack((IDamageble)obj);
+                    Rebound();
+                }
+                else
+                {
+                    Rebound();
+                }
+            }
+        }
+
+        //отскок - изменение направления на противоположное
+        private void Rebound()
+        {
+            direction.X = -direction.X;
+            direction.Y = -direction.Y;
         }
     }
 }

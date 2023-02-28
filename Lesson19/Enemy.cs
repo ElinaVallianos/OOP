@@ -2,7 +2,7 @@
 namespace Lesson19
 {
     //наследуемся от класса GameObject и реализуем интерфейсы
-    public class Enemy : GameObject, IMovable, IDamageble
+    public class Enemy : GameObject, IMovable, IDamageble, ICollideble
     {
         private Vector2 direction;
         private int health;
@@ -31,6 +31,18 @@ namespace Lesson19
             health -= power;
 
             Console.WriteLine($"{this}\t Health = {health}");
+        }
+
+        public void Collide(GameObject obstacle)
+        {
+            if (obstacle is Wall && Position.X == obstacle.Position.X && Position.Y == obstacle.Position.Y)
+            {
+                Console.WriteLine($"{this}\tCollision with {obstacle}");
+
+                direction.X = -direction.X;
+                direction.Y = -direction.Y;
+
+            }
         }
     }
 }
