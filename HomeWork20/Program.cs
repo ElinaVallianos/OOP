@@ -3,11 +3,11 @@ class Program
 {
     static void Main(string[] args)
     {
-        Bird bird = new Bird(0, 0, 30);
+        Bird bird = new Bird(1, 1, 30);
         bird.Direction = new Vector(0, 1);
 
         Wall wall1 = new Wall(1, 7);
-        Wall wall2 = new Wall(6, 6);
+        Wall wall2 = new Wall(6, 7);
         Wall wall3 = new Wall(5, 5);
         Wall wall4 = new Wall(2, 2);
 
@@ -20,17 +20,23 @@ class Program
         positions[4] = new int[] { 3, 2 };
         positions[5] = new int[] { 3, 4 };
 
+        IInteractional[] interactionals = new IInteractional[6];
+        
+
         Random rnd = new Random();
+        int index = 0;
         foreach (var position in positions) // можно ли так объявлять объекты?? 
         {
             int random = rnd.Next(1);
             switch (random)
             {
                 case 0:
-                    Poison poison = new Poison(position[0], position[1], 15);
+                    interactionals[index]= new Poison(position[0], position[1], 15);
+                    index++;
                     break;
                 default:
-                    Apple apple = new Apple(position[0], position[1], 10);
+                    interactionals[index] = new Apple(position[0], position[1], 10);
+                    index++;
                     break;
             }
         }
@@ -39,6 +45,11 @@ class Program
         {
             Move(bird);
             Interaction(bird, wall1, wall2, wall3, wall4); // как взаимодействовать с apple и poison, если они были объявленны без имён???
+
+            foreach (var item in interactionals)
+            {
+                Interaction(item, bird);
+            }
 
             if (bird.Health == 0)
             {
